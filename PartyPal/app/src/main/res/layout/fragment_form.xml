@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:weightSum="2">
+
+                <ImageView
+                    android:id="@+id/form_party_image"
+                    android:src="@android:drawable/ic_menu_gallery"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="Name: "
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:hint="Party Name"
+                        android:id="@+id/form_party_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:text="Host(s): "
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+                    <EditText
+                        android:hint="Jimmy, Tom, Bill"
+                        android:id="@+id/form_party_host"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:text="Location: "
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <!--<TextView-->
+                <!--android:id="@+id/location_BTN"-->
+                <!--android:background="@color/orange"-->
+                <!--android:text="LOCATION"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="45dp" />-->
+            <EditText
+                android:hint="Address"
+                android:id="@+id/form_party_address"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+
+                <EditText
+                    android:hint="City"
+                    android:id="@+id/form_party_city"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:layout_weight="1"
+                    android:id="@+id/state_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+                </LinearLayout>
+
+            <TextView
+                android:text="Date: "
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/form_party_date"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Time: "
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:hint="12:00"
+                    android:id="@+id/time_start"
+                    android:editable="false"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:text="to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:hint="12:00"
+                    android:id="@+id/time_end"
+                    android:editable="false"
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            <TextView
+                android:text="Pricing: "
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/form_party_price"
+                android:inputType="textMultiLine"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Description: "
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/form_party_descr"
+                android:inputType="textMultiLine"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/form_cancel"
+                    android:layout_gravity="end"
+                    android:text="CANCEL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp" />
+
+                <Button
+                    android:id="@+id/form_submit"
+                    android:layout_gravity="end"
+                    android:text="SUBMIT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp" />
+
+                </LinearLayout>
+            
+
+
+            
+        </LinearLayout>
+        </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:background="#fffff9ff"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:weightSum="2">
+
+    <LinearLayout
+        android:layout_weight="1.3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_margin="8dp"
+            android:src="@android:drawable/ic_menu_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight=".7"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:paddingTop="16dp"
+                android:text="SHAE ANTHONY HAZELWOOD"
+                android:singleLine="true"
+                android:ems="8"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:paddingTop="16dp"
+                android:text="no votes"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/item_vote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                android:textColor="@color/grey"
+                android:lines="3"
+                android:maxLines="3"
+                android:ellipsize="marquee"
+                android:textSize="14sp"
+                android:id="@+id/item_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:paddingRight="20dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/item_distance"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:gravity="right"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="1 mi"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="fill_parent"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content" />&ndash;&gt;-->
+
+            <!--</LinearLayout>-->
+
+
+
+        </LinearLayout>
+
+</LinearLayout>

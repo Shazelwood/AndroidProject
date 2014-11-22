@@ -19,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.hazelwood.partypal.Detail.Detail_Activity;
@@ -43,6 +42,7 @@ public class Tab_one_fragment extends Fragment {
     public static final String TAG = "TABoneFRAGMENT";
     private static final String ARG_ONE = "argument_two_section";
     LocationManager locationManager;
+    Double distance;
 
     public static Tab_one_fragment newInstance(String text) {
         Tab_one_fragment fragment = new Tab_one_fragment();
@@ -50,13 +50,6 @@ public class Tab_one_fragment extends Fragment {
         args.putString(ARG_ONE, text);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
     }
 
     public Tab_one_fragment() {
@@ -121,7 +114,6 @@ public class Tab_one_fragment extends Fragment {
                         final String price = objects.get(i).getString("price");
                         final String description = objects.get(i).getString("description");
                         final String objID =objects.get(i).getObjectId();
-//                        final String date =objects.get(i).getObjectId();
                         final int voteYES = objects.get(i).getInt("voteYes");
                         final int voteNO = objects.get(i).getInt("voteNo");
                         final long endDate = objects.get(i).getLong("endDate");
@@ -137,7 +129,11 @@ public class Tab_one_fragment extends Fragment {
                             public void done(byte[] bytes, ParseException e) {
 
 
-                                parties.add(new Party(name, host, address, timeStart, timeEnd, price, description, bytes, objID, voteYES, voteNO, votePercentage, endDate, date));
+                                //locTest(address);
+                                parties.add(new Party(name, host, address, timeStart, timeEnd, price, description,
+                                        bytes, objID, voteYES, voteNO, votePercentage, endDate, date, 0.0));
+
+
                                 Collections.sort(parties, new Comparator<Party>() {
                                     @Override
                                     public int compare(Party party1, Party party2) {
@@ -152,8 +148,6 @@ public class Tab_one_fragment extends Fragment {
                             }
                         });
                     }
-                } else {
-//                    objectRetrievalFailed();
                 }
             }
         });
@@ -171,51 +165,48 @@ public class Tab_one_fragment extends Fragment {
 
 
 
-
-
     }
 
     ///////Location////////
+    @Override
+    public void onResume() {
+        super.onResume();
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
-    public void locTest(Button btn){
+    }
+
+    public void locTest(String string){
 
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            LocTask task = new LocTask();
+            task.execute();
 
-                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    LocTask task = new LocTask();
-                    task.execute();
-
-                } else {
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                            getActivity());
-                    alertDialogBuilder
-                            .setMessage("GPS is disabled in your device. Enable it?")
-                            .setCancelable(false)
-                            .setPositiveButton("Enable GPS",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog,
-                                                            int id) {
-                                            Intent callGPSSettingIntent = new Intent(
-                                                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                            startActivity(callGPSSettingIntent);
-                                        }
-                                    });
-                    alertDialogBuilder.setNegativeButton("Cancel",
+        } else {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    getActivity());
+            alertDialogBuilder
+                    .setMessage("GPS is disabled in your device. Enable it?")
+                    .setCancelable(false)
+                    .setPositiveButton("Enable GPS",
                             new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
+                                public void onClick(DialogInterface dialog,
+                                                    int id) {
+                                    Intent callGPSSettingIntent = new Intent(
+                                            android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                    startActivity(callGPSSettingIntent);
                                 }
                             });
-                    AlertDialog alert = alertDialogBuilder.create();
-                    alert.show();
+            alertDialogBuilder.setNegativeButton("Cancel",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = alertDialogBuilder.create();
+            alert.show();
 
-                }
-            }
-        });
-
+        }
     }
 
     public static double distFrom(double lat1, double lng1, double lat2, double lng2) {
@@ -231,15 +222,14 @@ public class Tab_one_fragment extends Fragment {
         return dist;
     }
 
-    public class LocTask extends AsyncTask<Void, Void, Void>{
+    public class LocTask extends AsyncTask<String, Void, Void>{
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(String... params) {
 
             Geocoder coder = new Geocoder(getActivity());
             try {
-                ArrayList<Address> addresses = (ArrayList<Address>) coder.getFromLocationName("22 S Magnolia Ave" +
-                        "Orlando, FL", 50);
+                ArrayList<Address> addresses = (ArrayList<Address>) coder.getFromLocationName(params[0], 50);
                 double lat = 0, lng = 0;
                 for(Address add : addresses){
                     lng = add.getLongitude();
@@ -250,16 +240,11 @@ public class Tab_one_fragment extends Fragment {
                 String locationProvider = LocationManager.NETWORK_PROVIDER;
                 Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
                 Log.d("TAG", Double.toString(distFrom(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), lat, lng)));
+                distance = distFrom(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), lat, lng);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
-
-
-
-
             return null;
         }
     }

@@ -224,7 +224,7 @@ public class Detail_Activity extends Activity {
                         description, bytes,
                         objID, voteYES,
                         voteNO, votePercentage,
-                        endDate, date);
+                        endDate, date, 0.0);
                 saveToGoing(Detail_Activity.this, party);
             }
         });

@@ -12,8 +12,9 @@ public class Party implements Serializable, Comparable<Party> {
     int voteYES, voteNO, percent;
     long endDate;
     byte[] image;
+    double distance;
 
-    public Party(String _name, String _host, String _loc, String _timeBegin, String _timeFin, String _price, String _descr, byte[] bytes, String id, int yes, int no, int _percent, long end_date,String _date){
+    public Party(String _name, String _host, String _loc, String _timeBegin, String _timeFin, String _price, String _descr, byte[] bytes, String id, int yes, int no, int _percent, long end_date,String _date, double dist){
         name = _name;
         host = _host;
         location = _loc;
@@ -28,10 +29,15 @@ public class Party implements Serializable, Comparable<Party> {
         percent = _percent;
         endDate = end_date;
         date = _date;
+        distance = dist;
     }
 
     public Party(){
 
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
     public void setDate(String date) {
@@ -88,6 +94,10 @@ public class Party implements Serializable, Comparable<Party> {
 
     public void setTimeFinish(String timeFinish) {
         this.timeFinish = timeFinish;
+    }
+
+    public double getDistance() {
+        return distance;
     }
 
     public String getDate() {

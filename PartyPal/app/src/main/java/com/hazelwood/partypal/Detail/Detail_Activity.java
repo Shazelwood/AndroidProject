@@ -43,6 +43,7 @@ public class Detail_Activity extends Activity {
     public static final String TAG = "DETAILS_TAG";
     static final String ACTION_UPDATE_TAB_TWO = "ACTION_UPDATE_TAB_TWO";
     String objID;
+    boolean isOld;
     Button yesBTN, noBTN;
 
     @Override
@@ -55,19 +56,30 @@ public class Detail_Activity extends Activity {
 
         Intent detail = getIntent();
         Party party = (Party) detail.getSerializableExtra("party");
+        boolean isOld = detail.getBooleanExtra("isOld", false);
 
         objID = party.getObjID();
+
+
+
 
         TextView name = (TextView)findViewById(R.id.party_name);
         final TextView location = (TextView)findViewById(R.id.party_location);
         TextView time = (TextView)findViewById(R.id.party_time);
         TextView price = (TextView)findViewById(R.id.party_price);
         TextView description = (TextView)findViewById(R.id.party_description);
+
         yesBTN = (Button) findViewById(R.id.yesBTN);
         noBTN = (Button)findViewById(R.id.noBTN);
 
-        yesBTN.setOnClickListener(vote);
-        noBTN.setOnClickListener(vote);
+        if(!isOld){
+            yesBTN.setOnClickListener(vote);
+            noBTN.setOnClickListener(vote);
+            yesBTN.setVisibility(View.INVISIBLE);
+            noBTN.setVisibility(View.INVISIBLE);
+        }
+
+
 
         name.setText(party.getName());
         location.setText(party.getLocation());

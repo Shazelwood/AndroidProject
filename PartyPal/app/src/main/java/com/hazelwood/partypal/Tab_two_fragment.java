@@ -93,7 +93,7 @@ public class Tab_two_fragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        ArrayList<Party> arrayList;
+        final ArrayList<Party> arrayList;
 
         try {
             File extFolder = getActivity().getExternalFilesDir(null);
@@ -123,6 +123,8 @@ public class Tab_two_fragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent detail = new Intent(getActivity(), Detail_Activity.class);
+                        detail.putExtra("party", arrayList.get(position));
+                        detail.putExtra("old", true);
                         getActivity().startActivity(detail);
 
                     }
